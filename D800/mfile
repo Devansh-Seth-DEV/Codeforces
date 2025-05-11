@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE=$1
+REQ_DIR="../reqs"
+
+cat ${REQ_DIR}/template.cpp > ${FILE}.cpp
+vim ${FILE}.cpp

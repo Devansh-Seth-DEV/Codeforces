@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DIR="."
+BIN_DIR="${DIR}/bin"
+FILE=$1
+OUTPUT_NAME=$(basename "${FILE}" .cpp)
+
+RCMD="${BIN_DIR}/${OUTPUT_NAME}"
+
+${RCMD}
+
+if [ $? -eq 0 ]; then
+	echo ""
+	echo "Execution Successfull"
+else
+    echo "Execution failed."
+    exit 1
+fi

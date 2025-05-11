@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DIR="."
+BIN_DIR="${DIR}/bin"
+FILE=$1
+OUTPUT_NAME=$(basename "${FILE}" .cpp)
+
+CC="g++"
+FLAGS="-g -std=c++11 -O2 -Wall"
+CCIN="${FILE} -o ${BIN_DIR}/${OUTPUT_NAME}"
+CCMD="${CC} ${FLAGS} ${CCIN}"
+
+mkdir -p "${BIN_DIR}"
+
+${CCMD}
+
+if [ $? -eq 0 ]; then
+	echo "Complied Successfull"
+	echo "Executed ${OUTPUT_NAME}"
+	${BIN_DIR}/${OUTPUT_NAME}
+else
+    echo "Compilation failed."
+    exit 1
+fi
