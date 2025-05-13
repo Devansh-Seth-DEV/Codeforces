@@ -1,14 +1,16 @@
 #!/bin/bash
 
+PROJ_DIR="../"
 DIR="."
 BIN_DIR="${DIR}/bin"
 FILE=$1
 OUTPUT_NAME=$(basename "${FILE}" .cpp)
 
 CC="g++"
+INCLUDE_DIRS="${PROJ_DIR}/reqs"
 FLAGS="-g -std=c++11 -O2 -Wall"
 CCIN="${FILE} -o ${BIN_DIR}/${OUTPUT_NAME}"
-CCMD="${CC} ${FLAGS} ${CCIN}"
+CCMD="${CC} ${FLAGS} -I${INCLUDE_DIRS} ${CCIN}"
 
 mkdir -p "${BIN_DIR}"
 
