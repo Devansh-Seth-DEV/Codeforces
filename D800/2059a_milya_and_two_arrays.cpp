@@ -20,7 +20,16 @@ int main() {
 	cin >> t;
 
 	while(t--) {
+        int n;
+        cin >> n;
 
+        set<int> a, b;
+        int x;
+        REP(i,0,n) { cin >> x; a.insert(x); }
+        REP(i,0,n) { cin >> x; b.insert(x); }
+
+        if (a.size() + b.size() < 4) cout << "NO\n";
+        else cout << "YES\n";
 	}
     
     return 0;
