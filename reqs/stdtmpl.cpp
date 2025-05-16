@@ -8,7 +8,7 @@ using namespace std;
 					a[r]=a[l]; \
 					a[l]=temp;
 
-#define DARRAY(n,type) (type*) malloc(sizeof(type)*n)
+#define NEW(n,type) (type*) malloc(sizeof(type)*(n))
 
 typedef long long ll;
 
