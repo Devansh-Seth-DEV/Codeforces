@@ -18,8 +18,27 @@ int main() {
 	int t; cin >> t;
 
 	while(t--) {
+		int n; cin >> n;
+		int maxe; cin >> maxe;
+		int maxi=0, f=1;
+		REP(i,1,n) {
+			int x; cin >> x;
+			if (x>maxe) {
+				maxi=i; maxe=x;
+				f=1;
+			} else if(x==maxe) f++;
+		}
 
+		if (f==n) { cout << "NO\n"; continue; }
+
+		cout << "YES\n";
+		REP(i,0,n) {
+			if (i==maxi) cout << 2 << " ";
+			else cout << 1 << " ";
+		}
+		cout << "\n";
 	}
     
     return 0;
 }
+

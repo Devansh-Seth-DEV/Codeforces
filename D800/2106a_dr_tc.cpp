@@ -15,7 +15,19 @@ typedef long long ll;
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
+	int t; cin >> t;
 
-
+	while(t--) {
+		int n; cin >> n;
+		int f0=0;
+		REP(i,0,n) {
+			char x; cin >> x;
+			if (x=='0') f0++;
+		}
+		int f1=n-f0;
+		int res = (f1*(f1-1)) + ((f1*f0)+f0);
+		cout << res << "\n";
+	}
+    
     return 0;
 }

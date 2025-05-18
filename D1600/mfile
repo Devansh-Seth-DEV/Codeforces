@@ -9,7 +9,7 @@ STD_TMPL_FILE="${REQ_DIR}/stdtmpl.cpp"
 STD_TMPL_CURR=18
 
 STD_TMPL_TCASE_FILE="${REQ_DIR}/stdtmpl_tcase.cpp"
-STD_TMPL_TCASE_CURR=23
+STD_TMPL_TCASE_CURR=21
 
 VIM_FLAGS="normal! zR"
 

@@ -9,18 +9,19 @@ STD_TMPL_FILE="${REQ_DIR}/stdtmpl.cpp"
 STD_TMPL_CURR=18
 
 STD_TMPL_TCASE_FILE="${REQ_DIR}/stdtmpl_tcase.cpp"
-STD_TMPL_TCASE_CURR=23
+STD_TMPL_TCASE_CURR=21
+
+STD_TMPL_TNCASE_FILE="${REQ_DIR}/stdtmpl_tncase.cpp"
+STD_TMPL_TNCASE_CURR=22
 
 VIM_FLAGS="normal! zR"
 
-tflag=false
 if [ "$1" = "-t" ]; then
-	tflag=true
-fi
-
-if [ "${tflag}" = true ]; then
 	cat ${STD_TMPL_TCASE_FILE} > ${FILE}
 	vim +"${STD_TMPL_TCASE_CURR}" +"${VIM_FLAGS}" ${FILE}
+elif [ "$1" = "-tn" ]; then
+	cat ${STD_TMPL_TNCASE_FILE} > ${FILE}
+	vim +"${STD_TMPL_TNCASE_CURR}" +"${VIM_FLAGS}" ${FILE}
 else
 	cat ${STD_TMPL_FILE} > ${FILE}
 	vim +"${STD_TMPL_CURR}" +"${VIM_FLAGS}" ${FILE}
