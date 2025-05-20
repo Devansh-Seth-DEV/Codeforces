@@ -9,13 +9,14 @@ using namespace std;
 					a[l]=temp;
 
 #define NEW(n,type) (type*) malloc(sizeof(type)*(n))
+#define RI(i) int i; cin >> i
 
 typedef long long ll;
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
-	int t; cin >> t;
+	RI(t);
 
 	while(t--) {
 

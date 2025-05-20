@@ -16,7 +16,15 @@ typedef long long ll;
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
+	RI(t);
 
-
+	while(t--) {
+		RI(a); RI(b);
+		if (( a==0 && (b&1)==0 ) ||
+			(a>0 && (a&1)==0 && (a==b || b==0 || 1) )
+			) cout << "YES\n";
+		else cout << "NO\n";
+	}
+    
     return 0;
 }

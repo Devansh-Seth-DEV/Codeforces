@@ -9,14 +9,26 @@ using namespace std;
 					a[l]=temp;
 
 #define NEW(n,type) (type*) malloc(sizeof(type)*(n))
-#define RI(i) int i; cin >> i
 
 typedef long long ll;
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
+	int t; cin >> t;
 
-
+	while(t--) {
+		int n; cin >> n;
+		int maxi, mini=0;
+		cin >> maxi;
+		mini = maxi;
+		REP(i,1,n) {
+			int x; cin >> x;
+			if (x > maxi) maxi=x;
+			else if (x<mini) mini=x;
+		}
+		cout << (maxi-mini)*(n-1) << "\n";
+	}
+    
     return 0;
 }

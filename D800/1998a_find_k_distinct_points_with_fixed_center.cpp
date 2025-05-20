@@ -16,7 +16,17 @@ typedef long long ll;
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
+	RI(t);
 
+	while(t--) {
+		RI(xc); RI(yc); RI(k);
 
+		REP(i,0,(k>>1)) {
+			cout << xc << " " << yc-(i+1) << "\n";
+			cout << xc << " " << yc+(i+1) << "\n";
+		}
+		if(k&1) cout << xc << " " << yc << "\n";
+	}
+    
     return 0;
 }

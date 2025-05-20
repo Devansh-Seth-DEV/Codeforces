@@ -16,7 +16,12 @@ typedef long long ll;
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); 
     
+	RI(t);
 
-
+	while(t--) {
+		RI(n); RI(x); RI(y);
+		cout << ceil((float)n/min(x,y)) << "\n";
+	}
+    
     return 0;
 }
