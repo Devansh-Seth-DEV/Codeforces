@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Count .cpp files in git status
-count=$(git status --short | grep -E '\.cpp$' | wc -l)
+count=$(git status --short | grep -E '\.cpp$' | wc -l | xargs)
 
 # Create commit message
 commit_msg="Done $count more questions"
