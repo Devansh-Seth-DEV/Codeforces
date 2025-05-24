@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+DIFF_RATING="$1"
+ROOT_DIR="."
+NEW_DIFF_DIR="${ROOT_DIR}/D${DIFF_RATING}"
+REQ_DIR="./reqs/diff"
+
+mkdir -p $NEW_DIFF_DIR/bin
+
+cp ${REQ_DIR}/* $NEW_DIFF_DIR
+
+cd ${NEW_DIFF_DIR}
+
+
