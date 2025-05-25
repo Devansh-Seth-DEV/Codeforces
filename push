@@ -3,12 +3,22 @@
 # Count .cpp files in git status
 count=$(git status --porcelain | grep -E '^\?\? .*\.cpp$' | wc -l | xargs)
 
+# Count deleted files (any file type)
+deleted_count=$(git status --porcelain | grep -E '^ D ' | wc -l | xargs)
+
 # Create commit message
 if [ "$count" = 0 ]; then
 	commit_msg="Updated scripts"
 else
-	commit_msg="Done $count more questions"
+	suffix="question"
+	[ "$count" -ne 1 ] && suffix="files"
+	commit_msg="Done $count more $suffix"
 fi
+
+suffix="file"
+[ "$deleted_count" -ne 1 ] && suffix="files"
+
+commit_msg="${commit_msg} | Deleted ${deleted_count} $suffix"
 
 # Add all changes
 git add .
