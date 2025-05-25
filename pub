@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Count .cpp files in git status
-count=$(git status --short | grep -E '\.cpp$' | wc -l | xargs)
+count=$(git status --short | grep -E '^?? .*\.cpp$' | wc -l | xargs)
 
 # Create commit message
-commit_msg="Done $count more questions"
+if [ "$count" = 0 ]; then
+	commit_msg="Updated scripts"
+else
+	commit_msg="Done $count more questions"
+fi
 
 # Add all changes
 git add .

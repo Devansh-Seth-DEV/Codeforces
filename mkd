@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DIFF_RATING="$1"
+ROOT_DIR="."
+NEW_DIFF_DIR="${ROOT_DIR}/D${DIFF_RATING}"
+
+mkdir -p $NEW_DIFF_DIR
