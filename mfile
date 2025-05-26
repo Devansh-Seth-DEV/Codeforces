@@ -12,7 +12,7 @@ else
 	FILE="D${TYPE}/${FILE_NAME}"
 fi
 
-REQ_DIR="./reqs"
+REQ_DIR="./reqs/boiler"
 
 STD_TMPL_FILE="${REQ_DIR}/stdtmpl.cpp"
 STD_TMPL_CURR=46
