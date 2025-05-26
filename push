@@ -1,5 +1,6 @@
 #!/bin/bash
 
+custom_msg="$1"
 # Count .cpp files in git status
 count=$(git status --porcelain | grep -E '^\?\? .*\.cpp$' | wc -l | xargs)
 
@@ -21,6 +22,8 @@ if [ "$deleted_count" -ne 0 ]; then
 	[ "$deleted_count" -ne 1 ] && suffix="files"
 	commit_msg="${commit_msg} | Deleted ${deleted_count} $suffix"
 fi
+
+[ -n "$custom_msg" ] && commit_msg="$custom_msg"
 
 # Add all changes
 git add .
