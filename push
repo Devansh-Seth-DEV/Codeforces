@@ -15,10 +15,12 @@ else
 	commit_msg="Done $count more $suffix"
 fi
 
-suffix="file"
-[ "$deleted_count" -ne 1 ] && suffix="files"
 
-commit_msg="${commit_msg} | Deleted ${deleted_count} $suffix"
+if [ "$deleted_count" -ne 0 ]; then
+	suffix="file"
+	[ "$deleted_count" -ne 1 ] && suffix="files"
+	commit_msg="${commit_msg} | Deleted ${deleted_count} $suffix"
+fi
 
 # Add all changes
 git add .
