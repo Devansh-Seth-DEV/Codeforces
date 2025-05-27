@@ -1,6 +1,9 @@
 #!/bin/bash
 
-custom_msg="$1"
+git status
+
+read -p "Custom Message $:" custom_msg
+
 # Count .cpp files in git status
 count=$(git status --porcelain | grep -E '^\?\? .*\.cpp$' | wc -l | xargs)
 
