@@ -1,7 +1,5 @@
 #!/bin/bash
 
-git status
-
 custom_msg="$1"
 
 # Count .cpp files in git status
@@ -26,9 +24,11 @@ if [ "$deleted_count" -ne 0 ]; then
 	commit_msg="${commit_msg} | Deleted ${deleted_count} $suffix"
 fi
 
-[ -n "$custom_msg" ] && commit_msg="$custom_msg"
-
-read -p "Press <Enter> to push" is_pushed
+if [ -n "$custom_msg" ]; then
+	commit_msg="$custom_msg"
+	echo "[Message]: $commit_msg"
+	read -p "Press <Enter> to push" is_pushed
+fi
 
 # Add all changes
 git add .
