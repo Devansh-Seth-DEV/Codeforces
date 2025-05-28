@@ -15,7 +15,7 @@ if [ "$count" = 0 ]; then
 	commit_msg="Updated scripts"
 else
 	suffix="question"
-	[ "$count" -ne 1 ] && suffix="files"
+	[ "$count" -ne 1 ] && suffix="questions"
 	commit_msg="Done $count more $suffix"
 fi
 
