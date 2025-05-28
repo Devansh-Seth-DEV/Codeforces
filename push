@@ -2,7 +2,7 @@
 
 git status
 
-read -p "Custom Message $:" custom_msg
+custom_msg="$1"
 
 # Count .cpp files in git status
 count=$(git status --porcelain | grep -E '^\?\? .*\.cpp$' | wc -l | xargs)
@@ -27,6 +27,8 @@ if [ "$deleted_count" -ne 0 ]; then
 fi
 
 [ -n "$custom_msg" ] && commit_msg="$custom_msg"
+
+read -p "Press <Enter> to push" is_pushed
 
 # Add all changes
 git add .
