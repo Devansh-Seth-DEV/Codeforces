@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define FOR(i,s,e) for(int i=s; i<e; i++)
+#define FOR_REV(i,s,e) for (int i=s; i>e; i--)
+
+#define SWP(A,i,j) \
+	int temp=A[j]; \
+	A[j]=A[i]; \
+	A[i]=temp;
+
+#define INIT_NEW_NUM_ARGS_IMPL(_1, _2, _3, _4, _5, N, ...) N
+#define INIT_NEW_NUM_ARGS(...) INIT_NEW_NUM_ARGS_IMPL(__VA_ARGS__, 5, 4, 3, 2)
+
+#define INIT_NEW_ARGS_2(src,n) FOR(i,0,n) src[i] = 0
+#define INIT_NEW_ARGS_3(src,n,v) FOR(i,0,n) src[i] = v
+#define INIT_NEW_ARGS_4(src,n,v,inc) \
+    int temp=v;\
+    FOR(i,0,n) {\
+        src[i] = temp;\
+        temp += inc;\
+    }
+#define INIT_NEW_ARGS_5(src,n,v,oprnd,op) \
+	int temp=v;\
+	FOR(i,0,n) {\
+		src[i] = temp;\
+		temp = temp op oprnd;\
+	}
+
+#define INIT_NEW_CHOOSER(...) INIT_NEW_NUM_ARGS(__VA_ARGS__)
+
+#define INIT_NEW_EXPAND_HELPER(count, ...) INIT_NEW_ARGS_##count(__VA_ARGS__)
+#define INIT_NEW_EXPAND(count, ...) INIT_NEW_EXPAND_HELPER(count, __VA_ARGS__)
+
+
+#define NEW(n,type) (type*) malloc(sizeof(type)*(n))
+#define INIT_NEW(...) INIT_NEW_EXPAND(INIT_NEW_CHOOSER(__VA_ARGS__), __VA_ARGS__)
+
+#define RI(i) int i; cin >> i
+
+#define MOD 998244353
+
+typedef vector<int> vi;
+typedef long long ll;
+
+ll mod_pow(ll base, ll expo, ll mod) {
+    ll result = 1;
+    base %= mod;
+    while (expo > 0) {
+        if (expo & 1) result = (result * base) % mod;
+        base = (base * base) % mod;
+        expo >>= 1;
+    }
+    return result;
+}
+
+int main() {
+    ios::sync_with_stdio(0); cin.tie(0); 
+    
+	RI(t);
+
+	while(t--) {
+		RI(n);
+		vi p(n), q(n);
+
+		FOR(i,0,n) cin >> p[i];
+		FOR(i,0,n) cin >> q[i];
+
+        int pmxAt=0, qmxAt=0;
+		FOR(i,0,n) {
+			if (p[i]>p[pmxAt]) pmxAt=i;
+			if (q[i]>q[qmxAt]) qmxAt=i;
+			int P,Q;
+			if (p[pmxAt]==q[qmxAt]) {
+			    if (q[i-pmxAt]>p[i-qmxAt]) goto plabel;
+			    else goto qlabel;
+			} else if (p[pmxAt]>q[qmxAt]) {
+			    plabel:
+			      P = p[pmxAt];
+			      Q = q[i-pmxAt];
+			} else {
+		    	qlabel:
+		    	  P = p[i-qmxAt];
+			      Q = q[qmxAt];
+			}
+			ll p2 = mod_pow(2, P, MOD);
+			ll q2 = mod_pow(2, Q, MOD);
+
+			cout << (p2+q2)%MOD << " ";
+		}
+		cout << "\n";
+	}
+    
+    return 0;
+}
+
