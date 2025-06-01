@@ -28,7 +28,8 @@ if [ -n "$custom_msg" ]; then
 	commit_msg="$custom_msg"
 else
 	echo "[Message]: $commit_msg"
-	read -p "Press <Enter> to push" is_pushed
+	echo "[Info]: Press enter to push"
+	read is_pushed
 fi
 
 # Add all changes
