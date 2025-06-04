@@ -3,10 +3,8 @@
 FILE_NAME="$1.cpp"
 TYPE="$2"
 
-ARG="$3"
-
 if [ "$TYPE" = "1" ] || [ "$TYPE" = "2" ] || [ "$TYPE" = "3" ] || [ "$TYPE" = "4" ]; then
-	CONTEST_NO="$4"
+	CONTEST_NO="$3"
 	FILE="./contests/div${TYPE}/${CONTEST_NO}/${FILE_NAME}"
 else
 	FILE="D${TYPE}/${FILE_NAME}"
@@ -15,23 +13,9 @@ fi
 REQ_DIR="./reqs/boiler"
 
 STD_TMPL_FILE="${REQ_DIR}/stdtmpl.cpp"
-STD_TMPL_CURR=46
-
-STD_TMPL_TCASE_FILE="${REQ_DIR}/stdtmpl_tcase.cpp"
-STD_TMPL_TCASE_CURR=49
-
-STD_TMPL_TNCASE_FILE="${REQ_DIR}/stdtmpl_tncase.cpp"
-STD_TMPL_TNCASE_CURR=50
+STD_TMPL_CURR=18
 
 VIM_FLAGS="normal! zR"
 
-if [ "${ARG}" = "-t" ]; then
-	cat ${STD_TMPL_TCASE_FILE} > ${FILE}
-	vim +"${STD_TMPL_TCASE_CURR}" +"${VIM_FLAGS}" ${FILE}
-elif [ "${ARG}" = "-tn" ]; then
-	cat ${STD_TMPL_TNCASE_FILE} > ${FILE}
-	vim +"${STD_TMPL_TNCASE_CURR}" +"${VIM_FLAGS}" ${FILE}
-else
-	cat ${STD_TMPL_FILE} > ${FILE}
-	vim +"${STD_TMPL_CURR}" +"${VIM_FLAGS}" ${FILE}
-fi
+cp ${STD_TMPL_FILE} ${FILE}
+vim +"${STD_TMPL_CURR}" +"${VIM_FLAGS}" ${FILE}

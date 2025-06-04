@@ -1,49 +1,92 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-#define FOR(i,s,e) for(int i=s; i<e; i++)
-#define FOR_REV(i,s,e) for (int i=s; i>e; i--)
-
-#define SWP(A,i,j) \
-	int temp=A[j]; \
-	A[j]=a[i]; \
-	A[i]=temp;
-
-#define INIT_NEW_NUM_ARGS_IMPL(_1, _2, _3, _4, _5, N, ...) N
-#define INIT_NEW_NUM_ARGS(...) INIT_NEW_NUM_ARGS_IMPL(__VA_ARGS__, 5, 4, 3, 2)
-
-#define INIT_NEW_ARGS_2(src,n) FOR(i,0,n) src[i] = 0
-#define INIT_NEW_ARGS_3(src,n,v) FOR(i,0,n) src[i] = v
-#define INIT_NEW_ARGS_4(src,n,v,inc) \
-    int temp=v;\
-    FOR(i,0,n) {\
-        src[i] = temp;\
-        temp += inc;\
+ 
+ 
+class SolutionDelegate: public enable_shared_from_this<SolutionDelegate> {
+public:
+    static shared_ptr<SolutionDelegate> getSharedPtr() {
+        return make_shared<SolutionDelegate>();
     }
-#define INIT_NEW_ARGS_5(src,n,v,oprnd,op) \
-	int temp=v;\
-	FOR(i,0,n) {\
-		src[i] = temp;\
-		temp = temp op oprnd;\
-	}
-
-#define INIT_NEW_CHOOSER(...) INIT_NEW_NUM_ARGS(__VA_ARGS__)
-
-#define INIT_NEW_EXPAND_HELPER(count, ...) INIT_NEW_ARGS_##count(__VA_ARGS__)
-#define INIT_NEW_EXPAND(count, ...) INIT_NEW_EXPAND_HELPER(count, __VA_ARGS__)
-
-
-#define NEW(n,type) (type*) malloc(sizeof(type)*(n))
-#define INIT_NEW(...) INIT_NEW_EXPAND(INIT_NEW_CHOOSER(__VA_ARGS__), __VA_ARGS__)
-
-#define RI(i) int i; cin >> i
-
-typedef long long ll;
-
-int main() {
-    ios::sync_with_stdio(0); cin.tie(0); 
     
+    weak_ptr<SolutionDelegate> getWeakPtr() {
+        return shared_from_this();
+    }
+    
+    void didTakeInput() {
+        int n;
+        cin >> n;
+       	// Write your input logic here 
+		
+        solve(n); //Solver function (modify parameters accordingly)
+    }
+    
+    template <typename T>
+    void didShowOutput(const vector<T>& out, const char *sep = "", const char *end = "\n") {
+        for(const auto& o: out) cout << o << sep;
+        cout << end;
+    }
+    
+    template <typename T>
+    void didShowOutput(const T& x, const char *end = "\n") {
+        cout << x << end;
+    }
+    
+ 
+private:
+    void solve(n) {
+       	// Write your problem logic here 
 
-
-    return 0;
+        didShowOutput(n); // Display's the result on console
+    }
+};
+ 
+ 
+class Solution {
+private:
+    weak_ptr<SolutionDelegate> delegate;
+    bool hasTestCases = true;
+    int t=1;
+public:
+    Solution() {}
+    
+    Solution(bool testCases): hasTestCases(testCases) {}
+    
+    Solution(int cases): hasTestCases(false), t(cases) {}
+    
+    void enableTestCases() { hasTestCases = true; }
+    void disableTestCases() { hasTestCases = false; }
+    void setTestCases(int cases) { t = cases; }
+    
+    void setDelegate(weak_ptr<SolutionDelegate> d) { delegate = d; }
+    
+    void run() {
+        if (hasTestCases) cin >> t;
+        auto d = delegate.lock();
+        if (!d) {
+            //cout << "[Warning]: Delegate is not set\n";
+        }
+        
+        while(t--) {
+            if (d) d->didTakeInput();
+            else {
+                /* code to execute without delegate (if any) */
+            }
+        }
+    }
+};
+ 
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	
+	Solution solveManager = Solution(true);
+	shared_ptr<SolutionDelegate> solver = SolutionDelegate::getSharedPtr();
+	
+	solveManager.setDelegate(solver->getWeakPtr());
+	
+	solveManager.run();
+	
+	solver.reset();
+	
+	return 0;
 }
