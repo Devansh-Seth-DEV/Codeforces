@@ -15,28 +15,33 @@ public:
     void didTakeInput() {
         int n;
         cin >> n;
-       	// Write your input logic here 
+		vector<int> clocks(n);
+		for(auto& c: clocks) cin >> c;
 		
-        solve(n); //Solver function (modify parameters accordingly)
+        solve(clocks); //Solver function (modify parameters accordingly)
     }
     
     template <typename T>
-    void didOut(const vector<T>& out, const char *sep = "", const char *end = "\n") {
+    void didShowOutput(const vector<T>& out, const char *sep = "", const char *end = "\n") {
         for(const auto& o: out) cout << o << sep;
         cout << end;
     }
     
     template <typename T>
-    void didOut(const T& x, const char *end = "\n") {
+    void didShowOutput(const T& x, const char *end = "\n") {
         cout << x << end;
     }
     
  
 private:
-    void solve(n) {
-       	// Write your problem logic here 
-
-        didOut(n); // Display's the result on console
+    void solve(const vector<int>& clocks) {
+		int i=0, flag=0;
+		for(const auto c: clocks) {
+			int r = clocks.size()-i-1;
+			if (c<=i<<1 || c <= r<<1) flag=1;
+			i++;
+		}
+		didShowOutput(flag ? "NO" : "YES");
     }
 };
  
