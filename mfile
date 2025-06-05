@@ -13,7 +13,7 @@ fi
 REQ_DIR="./reqs/boiler"
 
 STD_TMPL_FILE="${REQ_DIR}/stdtmpl.cpp"
-STD_TMPL_CURR=18
+STD_TMPL_CURR=85
 
 VIM_FLAGS="normal! zR"
 
