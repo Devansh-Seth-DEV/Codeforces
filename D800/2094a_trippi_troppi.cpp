@@ -4,15 +4,8 @@ using namespace std;
 class SolutionDelegate:
 	public enable_shared_from_this<SolutionDelegate>
 {
-	protected:
-		bool canShowlog = false;
 	public:
 		weak_ptr<SolutionDelegate> getWeakPtr() { return shared_from_this(); }
-
-		void enableLog() { canShowlog = true; }
-		void disableLog() { canShowlog = false; }
-		
-		bool canLog() { return canShowlog; }
 
 		template <typename T>
 			void didOut(const vector<T>& out,
@@ -27,17 +20,10 @@ class SolutionDelegate:
 				cout << out << end;
 			}
 
-		void willExecute() {
-			didOut("[Info]: About to start the execution.");
-		}
-		
-		void didExecute() {
-			didOut("[Info]: Execution finish.");
-		}
 
 		virtual ~SolutionDelegate() = default;
 
-		virtual void execute() = 0;
+		virtual void didExecute() = 0;
 };
 
 class SolutionDelegateFactory {
@@ -78,35 +64,37 @@ class Problem {
 		void setDelegate(weak_ptr<SolutionDelegate> d) { delegate = d; }
 
 		void run() {
-			int cases=t;
-			if (hasTestCases) cin >> cases;
+			if (hasTestCases) cin >> t;
 			auto d = delegate.lock();
 			if (!d) {
 				cout << "[Error]: Delegate is not set. Stoping execution.\n";
 				return;
 			}
 
-			while(cases--) {
-				if (d->canLog()) d->willExecute();
-				d->execute();
-				if (d->canLog()) d->didExecute();
+			while(t--) {
+				d->didExecute();
 			}
 		}
 };
 
 class ProblemSolver: public SolutionDelegate {
 	public:
-		void execute() override {
-			// Write your input logic here 
+		void didExecute() override {
+			string a, b, c;
+			cin >> a >> b >> c;
+			cin.ignore();
 
-			solve(); //Solver function (modify parameters accordingly)
+			solve(a, b, c); //Solver function (modify parameters accordingly)
 		}
 
 	private:
-		void solve() {
-			// Write your problem logic here 
+		void solve(const string& a, const string& b, const string& c) {
+			vector<char> v(3);
+			v[0] = a[0];
+			v[1] = b[0];
+			v[2] = c[0];
 
-			didOut("Hello World"); // Display's the result on console
+			didOut(v); // Display's the result on console
 		}
 };
  
@@ -117,14 +105,13 @@ int main() {
 	SolutionDelegateFactory::reg<ProblemSolver>("ps");
 	
 	auto problemManager = Problem(true);
-	auto solverPtr = SolutionDelegateFactory::create("ps");
-	auto& solver = *solverPtr;
+	auto solver = SolutionDelegateFactory::create("ps");
 	
-	problemManager.setDelegate(solver.getWeakPtr());
+	problemManager.setDelegate(solver->getWeakPtr());
 	
 	problemManager.run();
 	
-	solverPtr.reset();
+	solver.reset();
 	
 	return 0;
 }
