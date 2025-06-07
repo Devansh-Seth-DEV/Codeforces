@@ -99,14 +99,15 @@ class ProblemSolver: public SolutionDelegate {
 		void execute() override {
 			// Write your input logic here 
 
-			solve(); //Solver function (modify parameters accordingly)
+			auto res = solve(); //Solver function (modify parameters accordingly)
+			didOut(res); // Display's the result on console
 		}
 
 	private:
-		void solve() {
-			// Write your problem logic here 
-
-			didOut("Hello World"); // Display's the result on console
+		int solve() {
+			// Write your problem logic here
+			
+			return 0; // Return the result of the problem
 		}
 };
  

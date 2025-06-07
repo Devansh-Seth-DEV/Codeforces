@@ -44,7 +44,7 @@ private:
 		didShowOutput(flag ? "NO" : "YES");
     }
 };
- 
+
  
 class Solution {
 private:
