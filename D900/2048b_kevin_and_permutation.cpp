@@ -97,16 +97,26 @@ class Problem {
 class ProblemSolver: public SolutionDelegate {
 	public:
 		void execute() override {
-			// Write your input logic here 
+			int n, k;
+			cin >> n >> k;
 
-			solve(); //Solver function (modify parameters accordingly)
+			vector<int> p = solve(n, k);
+			didOut(p);
 		}
 
 	private:
-		void solve() {
-			// Write your problem logic here 
+		vector<int> solve(const int n, const int k) {
+			vector<int> p(n,0);
+			int x=1;
+			for(int i=k; i<=n; i+=k) {
+				p[i-1] = x++;
+			}
 
-			didOut("Hello World"); // Display's the result on console
+			for(int i=0; i<n; i++) {
+				if (!p[i]) p[i] = x++;
+			}
+
+			return p;
 		}
 };
  

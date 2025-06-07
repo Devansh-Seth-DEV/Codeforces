@@ -16,7 +16,7 @@ class SolutionDelegate:
 
 		template <typename T>
 			void didOut(const vector<T>& out,
-					const char *sep = " ",
+					const char *sep = "",
 					const char *end = "\n") {
 				for(const auto& o: out) cout << o << sep;
 				cout << end;
@@ -97,16 +97,34 @@ class Problem {
 class ProblemSolver: public SolutionDelegate {
 	public:
 		void execute() override {
-			// Write your input logic here 
+			int n, k;
+			cin >> n >> k;
 
-			solve(); //Solver function (modify parameters accordingly)
+			vector<int> a(n);
+			for(auto& x: a) cin >> x;
+
+			int score = solve(a, k); //Solver function (modify parameters accordingly)
+			didOut(score);
 		}
 
 	private:
-		void solve() {
-			// Write your problem logic here 
+		int solve(const vector<int>& a, int k) {
+			unordered_map<int, int> freq;
+			for (const auto& x : a) freq[x]++;
 
-			didOut("Hello World"); // Display's the result on console
+			int score=0;
+			for(int i=1; i<=(k>>1); i++) {
+				if (i == k-i) {
+					score += freq[i] >> 1;
+					continue;
+				}
+				int mn = min(freq[i], freq[k-i]);
+				score += mn;
+				freq[i] -= mn;
+				freq[k-i] -= mn;
+			}
+
+			return score;
 		}
 };
  
