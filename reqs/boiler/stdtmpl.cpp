@@ -14,6 +14,10 @@ class SolutionDelegate:
 		
 		bool canLog() { return canShowlog; }
 
+		void didOut(const bool& out, const char *end = "\n") {
+			cout << (out ? "YES" : "NO") << end;
+		}
+
 		template <typename T>
 			void didOut(const vector<T>& out,
 					const char *sep = " ",
@@ -105,9 +109,10 @@ class ProblemSolver: public SolutionDelegate {
 
 	private:
 		int solve() {
+			int res = 0;
 			// Write your problem logic here
 			
-			return 0; // Return the result of the problem
+			return res; // Return the result of the problem
 		}
 };
  
