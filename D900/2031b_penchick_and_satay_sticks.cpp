@@ -14,10 +14,6 @@ class SolutionDelegate:
 		
 		bool canLog() { return canShowlog; }
 
-		void didOut(const bool& out, const char *end = "\n") {
-			cout << (out ? "YES" : "NO") << end;
-		}
-
 		template <typename T>
 			void didOut(const vector<T>& out,
 					const char *sep = " ",
@@ -30,6 +26,10 @@ class SolutionDelegate:
 			void didOut(const T& out, const char *end = "\n") {
 				cout << out << end;
 			}
+
+        void didOut(const bool out, const char* end = "\n") {
+            cout << (out ? "YES" : "NO") << end;
+        }
 
 		void willExecute() {
 			didOut("[Info]: About to start the execution.");
@@ -101,18 +101,30 @@ class Problem {
 class ProblemSolver: public SolutionDelegate {
 	public:
 		void execute() override {
-			// Write your input logic here 
+			int n;
+            cin >> n;
 
-			auto res = solve(); //Solver function (modify parameters accordingly)
+            vector<int> sticks(n);
+            for(auto& s: sticks) cin >> s;
+
+			auto res = solve(sticks); //Solver function (modify parameters accordingly)
 			didOut(res); // Display's the result on console
 		}
 
 	private:
-		int solve() {
-			int res = 0;
-			// Write your problem logic here
+		bool solve(const vector<int>& sticks) {
+			      bool res = true;
+            int cmp=sticks[0];
 			
-			return res; // Return the result of the problem
+            for(int i=1; i<sticks.size(); i++) {
+                if(sticks[i]>cmp) cmp=sticks[i];
+                else if (abs(sticks[i] - cmp) != 1) {
+                    res = false;
+                    break;
+                }
+            }
+			
+            return res; // Return the result of the problem
 		}
 };
  
