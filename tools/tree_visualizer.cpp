@@ -97,18 +97,22 @@ string format_string(const T& str, int width = 1, const char fill = ' ', bool le
 // Visualizes a binary tree in a structured format using ASCII art
 // The tree is printed level by level, with branches connecting parent nodes to child nodes
 // The width of each node is controlled by the parameter 'w'
-void visualize_binary_tree(Node* root, int w = 3) {
+void visualize_binary_tree(Node* root) {
     if (!root) {
         cout << 'nil\n';
         return;
     }
+    
+    const int h = height_binary_tree(root); // height of binary tree
+    int w = 3;
+    // if ((w&1) == 0) w += 1; // ensure odd width for better visualization
 
-    if ((w&1) == 0) w += 1; // ensure odd width for better visualization
-    w = max(3, w); // minimum width of a node is 3
+    // w = max(3, w); // minimum width of a node is 3
 
     const int mrsp = w+2; // minimum root prefix spacing
     const int mcsp = (mrsp<<1) - w; // minimum child prefix spacing
-    const int h = height_binary_tree(root); // height of binary tree
+    
+
     const int n = 1<<(h-1); // max possible nodes at last level of binary tree
     const int g = n>>1; // max possible group of pairs at last level of binary tree
     const int last_level_width = (g*mcsp) + ((g-1) * mrsp) + (n*w); // width of last level of binary tree
@@ -251,14 +255,7 @@ void visualize_binary_tree(Node* root, int w = 3) {
 int main() {
     Node* root = nullptr;
 
-    int n, w;
-
-    cout << "Enter the width of each node (default is 3): ";
-    cin >> w; // Read the width of each node
-    if (w <= 0) {
-        cout << "Invalid width. Using default width of 3.\n";
-        w = 3;
-    }
+    int n; // Number of nodes to insert
 
     cout << "Enter the number of nodes to insert into the binary tree: ";
     cin >> n; // Read the number of nodes to insert
@@ -276,7 +273,7 @@ int main() {
     }
 
     cout << "Visualizing the binary tree after insertion:\n";
-    visualize_binary_tree(root, w);
+    visualize_binary_tree(root);
 
     delete_binary_tree(root);
     
