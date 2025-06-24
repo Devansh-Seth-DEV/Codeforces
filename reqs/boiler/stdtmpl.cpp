@@ -8,6 +8,7 @@ class SolutionDelegate:
 		bool canShowlog = false;
 	    int total_queries = 1;
 	    int executed_queries = 0;
+		int current_query = 0;
 	public:
 		weak_ptr<SolutionDelegate> getWeakPtr() { return shared_from_this(); }
 
@@ -17,7 +18,9 @@ class SolutionDelegate:
 		
 		void setTotalQueries(int t) { total_queries = t; }
 		void updateExecutedQueries() { executed_queries++; }
-
+		void updateCurrentQuery() { current_query++; }
+		
+		int getCurrentQuery() { return current_query; }
 		int getTotalExecutedQueries() { return executed_queries; }
 
 		void didOut(const bool& out, const char *end = "\n") {
@@ -38,13 +41,14 @@ class SolutionDelegate:
 			}
 
 		void willExecute() {
-		    updateExecutedQueries();
-		    if (canLog())
+		    updateCurrentQuery();
+		    if (canShowlog)
 			    didOut("[Info]: About to start the execution.");
 		}
 		
 		void didExecute() {
-		    if (canLog())
+		    updateExecutedQueries();
+		    if (canShowlog)
 			    didOut("[Info]: Execution finish.");
 		}
 
