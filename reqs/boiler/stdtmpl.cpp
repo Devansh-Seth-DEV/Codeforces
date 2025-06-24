@@ -42,13 +42,13 @@ class SolutionDelegate:
 
 		void willExecute() {
 		    updateCurrentQuery();
-		    if (canShowlog)
+		    if (canLog())
 			    didOut("[Info]: About to start the execution.");
 		}
 		
 		void didExecute() {
 		    updateExecutedQueries();
-		    if (canShowlog)
+		    if (canLog())
 			    didOut("[Info]: Execution finish.");
 		}
 
