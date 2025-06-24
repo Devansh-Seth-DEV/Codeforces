@@ -6,13 +6,19 @@ class SolutionDelegate:
 {
 	protected:
 		bool canShowlog = false;
+	    int total_queries = 1;
+	    int executed_queries = 0;
 	public:
 		weak_ptr<SolutionDelegate> getWeakPtr() { return shared_from_this(); }
 
 		void enableLog() { canShowlog = true; }
 		void disableLog() { canShowlog = false; }
-		
 		bool canLog() { return canShowlog; }
+		
+		void setTotalQueries(int t) { total_queries = t; }
+		void updateExecutedQueries() { executed_queries++; }
+
+		int getTotalExecutedQueries() { return executed_queries; }
 
 		void didOut(const bool& out, const char *end = "\n") {
 			cout << (out ? "YES" : "NO") << end;
@@ -32,11 +38,14 @@ class SolutionDelegate:
 			}
 
 		void willExecute() {
-			didOut("[Info]: About to start the execution.");
+		    updateExecutedQueries();
+		    if (canLog())
+			    didOut("[Info]: About to start the execution.");
 		}
 		
 		void didExecute() {
-			didOut("[Info]: Execution finish.");
+		    if (canLog())
+			    didOut("[Info]: Execution finish.");
 		}
 
 		virtual ~SolutionDelegate() = default;
@@ -89,11 +98,12 @@ class Problem {
 				cout << "[Error]: Delegate is not set. Stoping execution.\n";
 				return;
 			}
-
+            
+            d->setTotalQueries(cases);
 			while(cases--) {
-				if (d->canLog()) d->willExecute();
+				d->willExecute();
 				d->execute();
-				if (d->canLog()) d->didExecute();
+				d->didExecute();
 			}
 		}
 };
